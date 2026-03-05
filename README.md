@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ☕ MimiCoffeeCRM
 
-## Getting Started
+AI-powered mini CRM built with Next.js.  
+This application helps coffee shop owners manage customers and generate marketing insights using AI.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# ▶️ Demo
+
+go to :
+
+```
+https://nextjs-mimi-ai-crm.vercel.app/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+login with demo account:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+email : admin@crm.com
+password : admin123
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 🚀 Overview
 
-## Learn More
+MimiCoffeeCRM is a lightweight CRM designed for small coffee shops.  
+It allows business owners to:
 
-To learn more about Next.js, take a look at the following resources:
+- Manage customer data
+- Analyze customer interests
+- Generate marketing promo ideas using AI
+- Chat with an AI marketing assistant
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The system combines **customer insights + AI recommendations** to help businesses run better marketing campaigns.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 🧠 Key Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 👥 Customer Management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Store customer profiles
+- Track favorite drinks
+- Track customer interests
+- Search customers
+- Pagination support
+
+---
+
+### 📊 Dashboard Overview
+
+Displays key CRM insights:
+
+- Total customers
+- Top interests
+- Customer interest distribution
+
+---
+
+### 🎯 AI Promo Ideas
+
+Generate marketing campaigns based on customer interests.
+
+Each generated promo includes:
+
+- Promo theme
+- Target segment
+- Why this promo works now
+- Ready-to-send message
+- Optional best time window
+
+Example:
+
+Theme: Caramel Week  
+Segment: customers who like caramel drinks  
+Why now: caramel interest trending this month  
+Message:  
+"Hi! New Caramel Cold Brew is in this week — get 10% off till Sunday."
+
+---
+
+### 🤖 AI Marketing Chat Assistant
+
+Chat with an AI assistant to:
+
+- brainstorm marketing ideas
+- generate campaign copy
+- suggest promotions
+- analyze customer behavior
+
+---
+
+### 🔐 Authentication
+
+- Login system
+- JWT based authentication
+- Protected routes
+- Bearer token API security
+
+---
+
+# 🧰 Tech Stack
+
+Frontend:
+
+- Next.js
+- React
+- TypeScript
+
+Backend:
+
+- Next.js API Routes
+- Prisma ORM
+
+Database:
+
+- PostgreSQL on SUPABASE
+
+AI:
+
+- OpenRouter API
+
+Deployment:
+
+- Vercel
