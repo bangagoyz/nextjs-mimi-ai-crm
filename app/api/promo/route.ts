@@ -1,54 +1,42 @@
-import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { ai } from "@/lib/ai";
+import { buildInterestInsights } from "@/lib/insights";
 import { buildPromoPrompt } from "@/lib/prompts";
-import { buildInterstInsights } from "@/lib/analytics";
+import { openrouter } from "@/lib/ai";
 
 export async function GET() {
   try {
-    const customers = await db.customer.findMany({
-      select: {
-        interests: true,
-      },
+    const customers = await db.customer.findMany();
+
+    const insights = buildInterestInsights(customers);
+
+    const prompt = buildPromoPrompt(insights);
+
+    const completion = await openrouter.chat.completions.create({
+      model: "arcee-ai/trinity-large-preview:free",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
     });
 
-    if (customers.length === 0) {
-      return NextResponse.json(
-        { error: "No Customers found to analyze" },
-        { status: 400 },
-      );
-    }
+    const raw = completion.choices[0].message.content;
 
-    const topInterests = buildInterstInsights(customers);
-    const prompt = buildPromoPrompt(topInterests);
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
-
-    const raw = response.text;
-    if (!raw) {
-      return NextResponse.json(
-        { error: "AI returned empty response" },
-        { status: 500 },
-      );
-    }
     let themes;
 
     try {
-      themes = JSON.parse(raw);
+      themes = JSON.parse(raw || "{}");
     } catch {
-      return NextResponse.json(
-        { error: "AI returned invalid response" },
-        { status: 500 },
-      );
+      return Response.json({
+        error: "AI returned invalid response",
+      });
     }
-    return NextResponse.json({ themes });
-  } catch (error) {
-    console.error("Promo Error:", error);
-    return NextResponse.json(
-      { error: "Failed to generate promo ideas" },
-      { status: 500 },
-    );
+
+    return Response.json({ themes });
+  } catch (err) {
+    console.error("Promo Error:", err);
+
+    return Response.json({ error: "Failed generating promo" }, { status: 500 });
   }
 }

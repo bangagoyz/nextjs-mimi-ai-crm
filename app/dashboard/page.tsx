@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { buildInterestInsights } from "@/lib/insights";
+import { cardStyle, buttonStyle } from "@/lib/ui";
 
 export default async function DashboardPage() {
   const customers = await db.customer.findMany();
@@ -18,7 +19,7 @@ export default async function DashboardPage() {
         fontFamily: "sans-serif",
       }}
     >
-      <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "white" }}>
+      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
         Dashboard Overview
       </h1>
 
@@ -32,42 +33,24 @@ export default async function DashboardPage() {
           marginTop: "30px",
         }}
       >
-        <div
-          style={{
-            padding: "20px",
-            borderRadius: "10px",
-            background: "white",
-            border: "1px solid #eee",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
-          }}
-        >
+        <div style={cardStyle}>
           <p style={{ color: "#111", fontSize: "30px", fontWeight: "bold" }}>
             Total Customers
           </p>
-          <h2 style={{ fontSize: "28px", color: "#666" }}>{totalCustomers}</h2>
+          <h2 style={{ fontSize: "32px" }}>{totalCustomers}</h2>
         </div>
 
-        <div
-          style={{
-            padding: "20px",
-            borderRadius: "10px",
-            background: "white",
-            border: "1px solid #eee",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
-          }}
-        >
+        <div style={cardStyle}>
           <p style={{ color: "#111", fontSize: "30px", fontWeight: "bold" }}>
             Top Interest
           </p>
-          <h2 style={{ fontSize: "28px", color: "#666" }}>
-            {interests[0]?.interest || "-"}
-          </h2>
+          <h2 style={{ fontSize: "28px" }}>{interests[0]?.interest || "-"}</h2>
         </div>
       </div>
 
       {/* TOP INTERESTS */}
 
-      <div style={{ marginTop: "40px", color: "white" }}>
+      <div style={{ marginTop: "40px" }}>
         <h3>Top Customer Interests</h3>
 
         <div
@@ -79,16 +62,7 @@ export default async function DashboardPage() {
           }}
         >
           {interests.map((i, idx) => (
-            <div
-              key={idx}
-              style={{
-                padding: "18px",
-                borderRadius: "10px",
-                border: "1px solid #e5e5e5",
-                background: "#ffffff",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
-              }}
-            >
+            <div key={idx} style={cardStyle}>
               <h4
                 style={{
                   fontSize: "16px",
@@ -99,7 +73,13 @@ export default async function DashboardPage() {
               >
                 {i.interest}
               </h4>
-              <p style={{ color: "#666", fontSize: "14px" }}>
+              <p
+                style={{
+                  color: "#895737",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                }}
+              >
                 {i.count} customers
               </p>
             </div>
@@ -111,20 +91,7 @@ export default async function DashboardPage() {
 
       <div style={{ marginTop: "40px" }}>
         <Link href="/promo">
-          <button
-            style={{
-              padding: "12px 18px",
-              borderRadius: "8px",
-              border: "none",
-              background: "#2563eb",
-              color: "white",
-              cursor: "pointer",
-              fontWeight: "bold",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-            }}
-          >
-            Generate Promo Ideas →
-          </button>
+          <button style={buttonStyle}>Generate Promo Ideas →</button>
         </Link>
       </div>
     </div>
