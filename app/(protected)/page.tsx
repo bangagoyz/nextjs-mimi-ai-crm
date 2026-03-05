@@ -8,7 +8,6 @@ export default function HomePage() {
         margin: "auto",
         padding: "80px 40px",
         textAlign: "center",
-        fontFamily: "sans-serif",
       }}
     >
       <h1 style={{ fontSize: "40px", marginBottom: "20px" }}>Mimi CRM</h1>

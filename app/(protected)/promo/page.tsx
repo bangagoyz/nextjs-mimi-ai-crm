@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/lib/auth-provider";
 import { useState } from "react";
 
 type PromoTheme = {
@@ -14,11 +15,17 @@ export default function PromoPage() {
   const [themes, setThemes] = useState<PromoTheme[]>([]);
   const [loading, setLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const { token } = useAuth();
 
   async function generateIdeas() {
     setLoading(true);
 
-    const res = await fetch("/api/promo");
+    const res = await fetch("/api/promo", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const data = await res.json();
 
     setThemes(data.themes || []);
@@ -38,18 +45,17 @@ export default function PromoPage() {
         maxWidth: "1200px",
         margin: "auto",
         padding: "40px",
-        fontFamily: "sans-serif",
       }}
     >
       {/* HEADER */}
 
       <div style={{ marginBottom: "30px" }}>
         <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
-          Promo Ideas Dashboard
+          Get Promo Ideas
         </h1>
 
         <p style={{ color: "#777", marginTop: "6px" }}>
-          AI-generated campaign ideas based on customer interests
+          Generate promo ideas just only by clicking 1 button
         </p>
       </div>
 
@@ -69,7 +75,7 @@ export default function PromoPage() {
             padding: "12px 18px",
             borderRadius: "8px",
             border: "none",
-            background: "#111",
+            background: "#5E3023",
             color: "white",
             cursor: "pointer",
             fontWeight: "bold",
@@ -116,7 +122,7 @@ export default function PromoPage() {
             style={{
               borderRadius: "12px",
               padding: "22px",
-              background: "white",
+              background: "#DAB49D",
               color: "#111",
               border: "1px solid #eee",
               boxShadow: "0 6px 16px rgba(0,0,0,0.08)",

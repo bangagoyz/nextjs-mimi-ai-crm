@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { customerSchema } from "@/lib/validations/customers";
+import { authMiddleware } from "@/lib/auth";
 
 interface Params {
   params: {
@@ -12,6 +13,12 @@ export async function PUT(
   req: Request,
   context: { params: Promise<{ id: string }> },
 ) {
+  const auth = authMiddleware(req);
+
+  if (auth.error) {
+    return new Response(auth.error, { status: 401 });
+  }
+
   try {
     const { id } = await context.params;
 

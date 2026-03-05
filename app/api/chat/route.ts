@@ -1,6 +1,13 @@
 import { openrouter } from "@/lib/ai";
+import { authMiddleware } from "@/lib/auth";
 
 export async function POST(req: Request) {
+  const auth = authMiddleware(req);
+
+  if (auth.error) {
+    return new Response(auth.error, { status: 401 });
+  }
+
   try {
     const { message } = await req.json();
 

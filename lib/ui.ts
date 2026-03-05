@@ -14,3 +14,13 @@ export const buttonStyle = {
   color: "white",
   cursor: "pointer",
 };
+
+export const navButtonStyle = {
+  padding: "8px 12px",
+  borderRadius: "6px",
+  border: "1px solid #895737",
+  background: "#F3E8DC",
+  color: "#6B4226",
+  cursor: "pointer",
+  fontWeight: "bold",
+};

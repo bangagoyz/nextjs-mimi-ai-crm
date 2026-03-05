@@ -16,7 +16,6 @@ export default async function DashboardPage() {
         maxWidth: "1100px",
         margin: "auto",
         padding: "40px",
-        fontFamily: "sans-serif",
       }}
     >
       <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
@@ -85,14 +84,6 @@ export default async function DashboardPage() {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* CTA */}
-
-      <div style={{ marginTop: "40px" }}>
-        <Link href="/promo">
-          <button style={buttonStyle}>Generate Promo Ideas →</button>
-        </Link>
       </div>
     </div>
   );

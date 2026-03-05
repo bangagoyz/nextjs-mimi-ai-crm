@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/lib/auth-provider";
 import { useState } from "react";
 
 type Message = {
@@ -11,6 +12,7 @@ export default function AIChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const { token } = useAuth();
 
   async function sendMessage() {
     if (!input.trim()) return;
@@ -31,6 +33,7 @@ export default function AIChatPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           message: userInput,
@@ -57,6 +60,11 @@ export default function AIChatPage() {
 
     setLoading(false);
   }
+  function resetChat() {
+    if (confirm("Clear chat history?")) {
+      setMessages([]);
+    }
+  }
 
   return (
     <div
@@ -64,12 +72,37 @@ export default function AIChatPage() {
         maxWidth: "800px",
         margin: "auto",
         padding: "40px",
-        fontFamily: "sans-serif",
       }}
     >
       <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
         Chat With Mimi AI Marketing Asistant
       </h1>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "20px",
+        }}
+      >
+        <h3>Conversation</h3>
+
+        <button
+          onClick={resetChat}
+          style={{
+            padding: "6px 12px",
+            borderRadius: "6px",
+            border: "none",
+            background: "#C08552",
+            color: "white",
+            cursor: "pointer",
+            fontSize: "13px",
+          }}
+        >
+          Reset Chat
+        </button>
+      </div>
 
       {/* CHAT WINDOW */}
 

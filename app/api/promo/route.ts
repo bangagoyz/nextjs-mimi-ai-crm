@@ -2,8 +2,15 @@ import { db } from "@/lib/db";
 import { buildInterestInsights } from "@/lib/insights";
 import { buildPromoPrompt } from "@/lib/prompts";
 import { openrouter } from "@/lib/ai";
+import { authMiddleware } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(req: Request) {
+  const auth = authMiddleware(req);
+
+  if (auth.error) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   try {
     const customers = await db.customer.findMany();
 
