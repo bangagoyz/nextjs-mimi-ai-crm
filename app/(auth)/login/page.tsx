@@ -67,12 +67,12 @@ export default function LoginPage() {
         }}
       >
         <h1 style={{ textAlign: "center" }}>MIMICOFFEE CRM</h1>
-        <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Login</h2>
+        <span />
+        <h2 style={{ fontSize: "15px" }}>Login</h2>
 
         <form
           onSubmit={handleLogin}
           style={{
-            marginTop: "20px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
