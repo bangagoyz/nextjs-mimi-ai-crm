@@ -51,58 +51,81 @@ export default function LoginPage() {
   return (
     <div
       style={{
-        padding: "40px",
-        maxWidth: "400px",
-        margin: "auto",
+        minHeight: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>Login</h1>
+      <div
+        style={{
+          background: "white",
+          padding: "40px",
+          borderRadius: "12px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+        }}
+      >
+        <h1 style={{ textAlign: "center" }}>MIMICOFFEE CRM</h1>
+        <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Login</h2>
 
-      <form onSubmit={handleLogin} style={{ marginTop: "20px" }}>
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+        <form
+          onSubmit={handleLogin}
           style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "10px",
-            borderRadius: "6px",
-            border: "1px solid #ddd",
-          }}
-        />
-
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "10px",
-            borderRadius: "6px",
-            border: "1px solid #ddd",
-          }}
-        />
-
-        {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
-
-        <button
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "#6B4226",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontWeight: "bold",
+            marginTop: "20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
           }}
         >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              borderRadius: "6px",
+              border: "1px solid #ddd",
+              boxSizing: "border-box",
+            }}
+          />
+
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              borderRadius: "6px",
+              border: "1px solid #ddd",
+              boxSizing: "border-box",
+            }}
+          />
+
+          {error && (
+            <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>
+          )}
+
+          <button
+            style={{
+              width: "100%",
+              padding: "12px",
+              background: "#6B4226",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
